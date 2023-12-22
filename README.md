@@ -10,5 +10,5 @@
 - Getting the the desired results from API endpoint: https://api.quotable.io/quotes/random?limit=${limit}&tags=${tag}
 
 # This is first of the many projects for my portfolio
-# Credits: https://api.quotable.io
-# Github repo: https://github.com/lukePeavey/quotable
+**Credits: https://api.quotable.io**
+**Github repo: https://github.com/lukePeavey/quotable**
