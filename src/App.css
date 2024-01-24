@@ -250,7 +250,6 @@ footer p {
     
     #permanent-box input[type="number"] {
         border-radius: 5px;
-        width: 50%;
     }
     
     #permanent-box button {
@@ -341,6 +340,8 @@ footer p {
         padding: 10px 5px;
         font-size: 14px;
         font-weight: bold;
+        width: 80%;
+        border-radius: 5px;
     }
     
     #permanent-box button {
