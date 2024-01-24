@@ -73,7 +73,8 @@ main {
 }
 
 #permanent-box h1 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
 }
 
 #permanent-box form {
@@ -226,6 +227,7 @@ footer {
     text-align: center;
     height: auto;
     padding: 5px;
+    text-transform: uppercase;
 }
 
 footer p {
@@ -314,7 +316,7 @@ footer a:hover {
     }
     
     #permanent-box h1 {
-        font-size: 3.5rem;
+        font-size: 2.5rem;
     }
 
     #quote-box {

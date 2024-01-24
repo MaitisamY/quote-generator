@@ -4,7 +4,7 @@ export default function Footer() {
     }
     return (
         <footer>
-            <p>&copy; {new Date().getFullYear()}, PLANNER.</p>
+            <p>&copy; {new Date().getFullYear()}, Guote Generator.</p>
             <span>Made with ❤️ by 
                 <a target="_blank" rel="noopener noreferrer" onClick={gotoMyPortfolio}> Aitisam Yaseen</a>
             </span>
