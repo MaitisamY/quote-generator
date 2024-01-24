@@ -337,7 +337,7 @@ footer p {
         font-weight: bold;
     }
     
-    #permanent-box input {
+    #permanent-box  input[type="number"] {
         padding: 10px 5px;
         font-size: 14px;
         font-weight: bold;
@@ -367,7 +367,7 @@ footer p {
         border-radius: 5px;
     }
     
-    #permanent-box input {
+    #permanent-box  input[type="number"] {
         padding: 10px 5px;
         font-size: 14px;
         font-weight: normal;
