@@ -327,6 +327,7 @@ footer a:hover {
         min-height: 15vh;
         width: 90%;
         padding: 20px 20px 10px 20px;
+        border-right: none;
     }
 
     #quotes {
