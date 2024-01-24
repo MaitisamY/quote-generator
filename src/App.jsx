@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import logo from './assets/icon.png'
 import Main from './components/Main'
+import Footer from './components/Footer'
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
 import './App.css'
 
@@ -110,6 +112,7 @@ export default function App() {
           }
         </div>
       </Main>
+      <Footer />
       <div id="below-300-pixels">
             <p>This site is designed for use on screens above 300 pixels only.</p>
       </div>
