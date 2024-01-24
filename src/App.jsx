@@ -22,7 +22,7 @@ export default function App() {
     };
 
     fetchTags();  // Call the function when the component mounts
-  }, []);
+  }, [error]);
 
   const generateRandomQuote = async (e) => {
     e.preventDefault();
@@ -34,8 +34,18 @@ export default function App() {
       return;
     }
 
-    if (!limit || limit === '' || limit < 1) {
+    else if (!limit || limit === '' || limit === null) {
       setError('Please enter a limit.');
+      return;
+    }
+
+    else if (limit && limit < 1) {
+      setError('Limit must be greater than 0.');
+      return;
+    }
+
+    else if (limit && limit > 12) {
+      setError('Limit must be less than 13.');
       return;
     }
 
@@ -70,27 +80,34 @@ export default function App() {
                   <option key={index} value={tag.name}>{tag.name}</option>
                 ))}
               </select>
-              <label>Number of quotes <input type="number" name="limit" min="1" max="12" defaultValue={1} /> </label>
+              <label>Number of quotes <span>(1-12 digits)</span></label> 
+              <input type="number" name="limit" defaultValue={1} /> &nbsp;
               <button type="submit">Generate</button>
             </form>
           </div>
           {error && <p id="error">{error}</p>}
-          <ul>
+          {/* <ul>
               <li>Tag and limit selection is must.</li>
               <li>Limit must be between 1 and 12.</li>
               <li>Each time you hit generate button, a new set of quotes will be generated.</li>
               <li>If the selected tag does not contain the provided limit, then no quotes will be generated.</li>
-          </ul>
+          </ul> */}
         </div>
         <div id="quote-box">
-          {quotes && quotes.map((quote, index) => (
-            <div id="quotes" key={index}>
-              <p>
-                  <FaQuoteLeft /> &nbsp; {quote.content} &nbsp; <FaQuoteRight />
-              </p>
-              <span>{quote.author}</span>
-            </div>
-          ))}
+          {
+            quotes.length > 0 ? (quotes.map((quote, index) => (
+              <div id="quotes" key={index}>
+                <p>
+                    <FaQuoteLeft /> &nbsp; {quote.content} &nbsp; <FaQuoteRight />
+                </p>
+                <span>{quote.author}</span>
+              </div>
+          ))) : (
+              <h2>
+                  Searched quotes will appear here. 
+              </h2>
+          )
+          }
         </div>
       </Main>
       <div id="below-300-pixels">
@@ -98,6 +115,6 @@ export default function App() {
       </div>
     </>
   )
-};
+}
 
 /* Credits: https://quotable.io */

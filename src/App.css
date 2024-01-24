@@ -79,6 +79,13 @@ main {
     border: 1px solid #d6e9e8;
     padding: 10px;
     border-radius: 5px;
+    width: 90%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 #permanent-box select {
@@ -106,9 +113,16 @@ main {
     font-size: 18px;
     font-weight: bold;
     font-family: 'Inter', sans-serif;
+    width: fit-content;
 }
 
-#permanent-box input {
+#permanent-box label span {
+    color: #09322f9f;
+    font-size: 12px;
+}
+
+#permanent-box input[type="number"] {
+    width: 100px;
     margin: 0;
     padding: 20px 10px;
     font-size: 18px;
@@ -120,7 +134,7 @@ main {
 }
 
 #permanent-box button {
-    margin: 0;
+    margin: 10px 5px;
     padding: 20px;
     font-size: 18px;
     font-weight: bold;
@@ -150,18 +164,27 @@ main {
 }
 
 #quote-box {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    gap: 20px;
-    align-items: start;
-    justify-content: start;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
     height: 80%;
     width: 55%;
     margin-top: 10px;
     padding: 20px 20px 50px 50px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+#quote-box h2 {
+    color: #09322fd3;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
 }
 
 #quote-box p {
@@ -176,10 +199,8 @@ main {
 }
 
 #quotes {
-    display: block;
     margin-top: 20px;
-    width: 90%;
-    gap: 10px;
+    width: 25%;
     height: auto;
     padding: 20px;
     -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.1);
@@ -213,7 +234,7 @@ footer p {
 @media screen and (max-width: 1650px) {
     #permanent-box form {
         display: flex;
-        width: auto;
+        width: 90%;
         flex-direction: column;
         gap: 10px;
     }
@@ -227,8 +248,9 @@ footer p {
         border: 1px solid #cce0df;
     }
     
-    #permanent-box input {
+    #permanent-box input[type="number"] {
         border-radius: 5px;
+        width: 50%;
     }
     
     #permanent-box button {
