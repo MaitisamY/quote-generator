@@ -60,7 +60,7 @@ export default function App() {
     const tag = e.target.tags.value;
 
     if (!tag || tag === '1') {
-      setError('Please select a tag.');
+      setError('Please select a quote type.');
       return;
     }
 
@@ -88,7 +88,7 @@ export default function App() {
         if (data.length > 0) {
           setQuote(data);
         } else {
-          setQuote([{ content: 'No quotes found for the selected tag.' }]);
+          setQuote([{ content: 'No quotes found for the selected quote type.' }]);
         }
       } catch (error) {
         console.error('Error fetching quotes:', error);
@@ -125,13 +125,17 @@ export default function App() {
                   <FaQuoteLeft /> &nbsp; {quote.content} &nbsp; <FaQuoteRight />
                 </p>
                 <span id={`quote-author-${index}`}>{quote.author}</span>
-                <button 
-                  onClick={() => copyToClipboard(index)}
-                  onMouseOver={() => toggleTooltip(index, true)}
-                  onMouseLeave={() => toggleTooltip(index, false)}
-                >
-                  <FaRegCopy />
-                </button>
+                {
+                  quote.content === 'No quotes found for the selected tag.' ? null : (
+                    <button 
+                      onClick={() => copyToClipboard(index)}
+                      onMouseOver={() => toggleTooltip(index, true)}
+                      onMouseLeave={() => toggleTooltip(index, false)}
+                    >
+                      <FaRegCopy />
+                    </button>
+                  )
+                }
                 {copiedIndex === index && <i><FaCheck /> &nbsp; Copied</i>}
                 {tooltipState[index] && <div className="tooltip">Copy to clipboard</div>}
               </div>
