@@ -4,14 +4,42 @@ import axios from 'axios'
 import logo from './assets/icon.png'
 import Main from './components/Main'
 import Footer from './components/Footer'
-import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
+import { FaQuoteLeft, FaQuoteRight, FaRegCopy, FaCheck } from 'react-icons/fa'
 import './App.css'
 
 export default function App() {
   const [quotes, setQuote] = useState([]);
   const [tags, setTags] = useState([]);
   const [error, setError] = useState('');
+  const [copiedIndex, setCopiedIndex] = useState(null);
+  const [tooltipState, setTooltipState] = useState(Array(quotes.length).fill(false));
 
+  function toggleTooltip(index, isHovered) {
+    setTooltipState((prev) => {
+      const newState = [...prev];
+      newState[index] = isHovered;
+      return newState;
+    });
+  }
+
+  function copyToClipboard(index) {
+    const quoteContent = document.getElementById(`quote-content-${index}`).innerText;
+    const quoteAuthor = document.getElementById(`quote-author-${index}`).innerText;
+    const fullQuote = `${quoteContent} - ${quoteAuthor}`;
+
+    const textarea = document.createElement('textarea');
+    textarea.value = fullQuote;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    setCopiedIndex(index);
+
+    setTimeout(() => {
+      setCopiedIndex(null);
+    }, 3000);
+  }
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -82,27 +110,30 @@ export default function App() {
                   <option key={index} value={tag.name}>{tag.name}</option>
                 ))}
               </select>
-              <label>Number of quotes <span>(1-12 digits)</span></label> 
-              <input type="number" name="limit" defaultValue={1} /> &nbsp;
+              <label>Number of quotes <span>(1-12 digits)</span></label> &nbsp; 
+              <input type="number" name="limit" defaultValue={1} /> 
               <button type="submit">Generate</button>
             </form>
           </div>
           {error && <p id="error">{error}</p>}
-          {/* <ul>
-              <li>Tag and limit selection is must.</li>
-              <li>Limit must be between 1 and 12.</li>
-              <li>Each time you hit generate button, a new set of quotes will be generated.</li>
-              <li>If the selected tag does not contain the provided limit, then no quotes will be generated.</li>
-          </ul> */}
         </div>
         <div id="quote-box">
           {
             quotes.length > 0 ? (quotes.map((quote, index) => (
               <div id="quotes" key={index}>
-                <p>
-                    <FaQuoteLeft /> &nbsp; {quote.content} &nbsp; <FaQuoteRight />
+                <p id={`quote-content-${index}`}>
+                  <FaQuoteLeft /> &nbsp; {quote.content} &nbsp; <FaQuoteRight />
                 </p>
-                <span>{quote.author}</span>
+                <span id={`quote-author-${index}`}>{quote.author}</span>
+                <button 
+                  onClick={() => copyToClipboard(index)}
+                  onMouseOver={() => toggleTooltip(index, true)}
+                  onMouseLeave={() => toggleTooltip(index, false)}
+                >
+                  <FaRegCopy />
+                </button>
+                {copiedIndex === index && <i><FaCheck /> &nbsp; Copied</i>}
+                {tooltipState[index] && <div className="tooltip">Copy to clipboard</div>}
               </div>
           ))) : (
               <h2>
